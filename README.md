@@ -3,5 +3,5 @@
 ### Año-Cuatrimestre - Curso-Grupo
 ### Responsable de la entrega:
 | Padrón | Apellidos, Nombres | Fecha | Deadline |
-| :113627 | :Maselli Miño, Lucas Lautaro | :------: | :-------: |
-| XXXXXX | YYYY, ZZZ | | Semana 04 |
+| :----- | :--------------------- | :------: | :-------: |
+| 113627 | Maselli Miño, Lucas Lautaro | | Semana 04 |
