@@ -1,2 +1,7 @@
-# tdse-tp1_2026-2doC_1-07
-# FIUBA - Electrónica - Taller de Sistemas Embebidos - Trabajo Práctico N°: 1 - Diagramas de Estado - Modelado
+# FIUBA - Electrónica - Taller de Sistemas Embebidos
+## Trabajo Práctico N°: 1 - Diagramas de Estado - Modelado
+### Año-Cuatrimestre - Curso-Grupo
+### Responsable de la entrega:
+| Padrón | Apellidos, Nombres | Fecha | Deadline |
+| :113627 | :Maselli Miño, Lucas Lautaro | :------: | :-------: |
+| XXXXXX | YYYY, ZZZ | | Semana 04 |
