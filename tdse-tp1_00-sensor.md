@@ -43,3 +43,18 @@ Estando en ST_BTN_DOWN, el usuario suelta el botón. Se detecta EV_BTN_FREE y se
 >Si hay rebote: Los contactos vibran cerrando el circuito brevemente. Se lee EV_BTN_HOLD. El modelo vuelve a ST_BTN_DOWN.
 
 >Si es estable: Pasan 50 ms (after 50ms) confirmando la liberación. El modelo regresa a ST_BTN_UP y ejecuta raise EV_SYS_OFF.
+
+
+### Sensor Statechart - State Transition Table
+
+| Current State | Event | [Guard] | Next State | Actions |
+| :--- | :--- | :--- | :--- | :--- |
+| `ST_BTN_UP`   | `EV_BTN_HOLD` | | `ST_BTN_FALL` | `timer = 0` |
+| `ST_BTN_FALL` | `EV_BTN_FREE` | | `ST_BTN_UP`   | |
+| `ST_BTN_FALL` | `tick`        | `[timer >= 50]` | `ST_BTN_DOWN` | `raise EV_SYS_ON` |
+| `ST_BTN_DOWN` | `EV_BTN_FREE` | | `SR_BTN_RISE` | `timer = 0` |
+| `SR_BTN_RISE` | `EV_BTN_HOLD` | | `ST_BTN_DOWN` | |
+| `SR_BTN_RISE` | `tick`        | `[timer >= 50]` | `ST_BTN_UP`   | `raise EV_SYS_OFF` |
+
+---
+*Nota de implementación: Se asume `tick` como el evento del ejecutivo cíclico que ocurre cada 1mS. El temporizador se inicializa (`timer = 0`) en las transiciones hacia los estados transitorios. Las acciones de `entry` del modelo gráfico (`raise EV_SYS_ON` y `raise EV_SYS_OFF`) se asientan aquí como las acciones ejecutadas durante las transiciones hacia los estados estables una vez superada la guardia de los 50ms.*
