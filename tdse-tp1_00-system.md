@@ -24,3 +24,12 @@ Las acciones definidas en este modelo se implementan como eventos de salida (out
 >EV_ACT_BARON y EV_ACT_BAROFF (Barrier): Se encargan de dar la orden de levantar ("Open barrier") o bajar ("Close barrier") la barrera de paso, respectivamente. Para la etapa de prototipado sin actuadores reales, el estado de la barrera se emula controlando un indicador LED.
 
 >EV_ACT_SVR (Server): Tras cerrarse la barrera (en ST_SYS_OFF), se dispara esta acción para notificar al servidor de estacionamiento (Parking System Server) que el vehículo ingresó exitosamente al predio ("Car inside").
+
+# System Statechart - State Transition Table
+
+| Current State | Event | [Guard] | Next State | Actions (Entry Actions del Next State) |
+| :--- | :--- | :--- | :--- | :--- |
+| **(Initial)** | - | - | **ST_SYS_OFF** | `EV_ACT_BAROFF`, `EV_ACT_SVR` |
+| **ST_SYS_OFF** | `EV_CAM_ON` | - | **ST_SYS_BTN** | `EV_ACT_DSP` |
+| **ST_SYS_BTN** | `EV_BTN_ON` | - | **ST_SYS_WAIT** | `EV_ACT_TKT`, `EV_ACT_BARON` |
+| **ST_SYS_WAIT**| `EV_SNR_OFF`| - | **ST_SYS_OFF** | `EV_ACT_BAROFF`, `EV_ACT_SVR` |
