@@ -2,6 +2,9 @@ Explicación de los Estados (Actuador de la Barrera)
 
 El diagrama modela el comportamiento electromecánico de la barrera de acceso. Dado que los motores físicos tardan un tiempo en mover la barrera, el modelo incluye estados transitorios temporizados.
 
+Estados de la Máquina (state => ST_BTN_NAME):
+El modelo se divide en cuatro estados, dos estables y dos transitorios (ventanas de validación):
+
 ST_ACT_OFF (Barrera Baja / Reposo): Es el estado inicial y de reposo del actuador. La barrera está completamente cerrada impidiendo el paso. El led está apagado.
 
 ST_ACT_TITR (Transición de Apertura - Tilting / Raising): Cuando el sistema recibe la orden de abrir, entra en este estado representando el tiempo que el motor físico está girando para levantar la barrera. Utiliza un evento temporal (after 3s) simulando que la barrera tarda exactamente 3 segundos en abrirse por completo. Se ve como un led que tiene su luz titilando.
