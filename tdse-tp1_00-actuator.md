@@ -28,3 +28,6 @@ Eventos de Entrada (Triggers para escrutinio):
 | **ST_ACT_TITR** | `after 3s` (Timer) | - | **ST_ACT_ON** | - |
 | **ST_ACT_ON** | `EV_ACT_BAROFF` | - | **ST_ACT_TITL** | - |
 | **ST_ACT_TITL** | `after 3s` (Timer) | - | **ST_ACT_OFF** | - |
+
+---
+*Nota de implementación: Las condiciones after 3s se implementan en C mediante un temporizador interno (timer) incrementado cíclicamente cada 1 mS (tick). Los estados de titilado (TITR / TITL) ejecutan la conmutación periódica del actuador mientras la variable de control permanezca en timer < 3000.*
