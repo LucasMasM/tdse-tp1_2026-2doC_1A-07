@@ -23,11 +23,13 @@ Eventos de Entrada (Triggers para escrutinio):
 
 | Current State | Event | [Guard] | Next State | Actions |
 | :--- | :--- | :--- | :--- | :--- |
-| **(Initial)** | - | - | **ST_ACT_OFF** | - |
-| **ST_ACT_OFF** | `EV_ACT_BARON` | - | **ST_ACT_TITR** | - |
-| **ST_ACT_TITR** | `after 3s` (Timer) | - | **ST_ACT_ON** | - |
-| **ST_ACT_ON** | `EV_ACT_BAROFF` | - | **ST_ACT_TITL** | - |
-| **ST_ACT_TITL** | `after 3s` (Timer) | - | **ST_ACT_OFF** | - |
+| `ST_ACT_OFF` | `EV_ACT_BARON` | | `ST_ACT_TITR` | `timer = 0` |
+| `ST_ACT_TITR` | `tick` | `[timer < 3000]` | `ST_ACT_TITR` | `timer++`, `toggle_led()` |
+| `ST_ACT_TITR` | `tick` | `[timer >= 3000]` | `ST_ACT_ON` | `turn_led_on()` |
+| `ST_ACT_ON` | `EV_ACT_BAROFF` | | `ST_ACT_TITL` | `timer = 0` |
+| `ST_ACT_TITL` | `tick` | `[timer < 3000]` | `ST_ACT_TITL` | `timer++`, `toggle_led()` |
+| `ST_ACT_TITL` | `tick` | `[timer >= 3000]` | `ST_ACT_OFF` | `turn_led_off()` |
+
 
 ---
 *Nota de implementación: Las condiciones after 3s se implementan en C mediante un temporizador interno (timer) incrementado cíclicamente cada 1 mS (tick). Los estados de titilado (TITR / TITL) ejecutan la conmutación periódica del actuador mientras la variable de control permanezca en timer < 3000.*
